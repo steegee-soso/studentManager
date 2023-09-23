@@ -1,15 +1,28 @@
 package com.soso.studentmanager;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
+@Entity
+@Table(name="student")
 public class Student {
 
     public Student(){}
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.TABLE)
+    private Integer Id;
+
     private String firstName;
+
     private String lastName;
+
+    @Column(name="email", unique = true)
     private String email;
+
     private int age;
+
     private LocalDate dateOfBirth;
 
     public Student(String firstName, String lastName, String email, int age, LocalDate dateOfBirth){
@@ -45,21 +58,39 @@ public class Student {
     }
 
     public int getAge(){
-        return  age;
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
     public void setAge(int age) {
         this.age = age;
     }
 
+    public Integer getId() {
+        return Id;
+    }
+    public void setId(Integer id) {
+        Id = id;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+
     @Override
     public String toString() {
         return "Student{" +
-                "firstName='" + firstName + '\'' +
+                "Id=" + Id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", dateOfBirth=" + dateOfBirth +
                 '}';
     }
+
 }

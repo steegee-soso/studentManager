@@ -5,7 +5,7 @@ import java.util.List;
 @Service
 public class InMemoryStudentService implements StudentService  {
 
-    private InMemoryStudentDAO inMemoryStudentDAO;
+    private final InMemoryStudentDAO inMemoryStudentDAO;
 
     public InMemoryStudentService(InMemoryStudentDAO inMemoryStudentDAO){
         this.inMemoryStudentDAO=inMemoryStudentDAO;

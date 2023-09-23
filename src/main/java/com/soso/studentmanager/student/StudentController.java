@@ -1,10 +1,12 @@
 package com.soso.studentmanager.student;
 
 
+import com.soso.studentmanager.DBStudentService;
 import com.soso.studentmanager.Student;
 import com.soso.studentmanager.InMemoryStudentService;
 import com.soso.studentmanager.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cglib.core.Local;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,7 @@ import java.util.List;
 public class StudentController {
 
     private StudentService studentService;
-    public StudentController(StudentService studentService){
+    public StudentController(@Qualifier("DBStudentService") StudentService studentService){
         this.studentService= studentService;
     }
     @GetMapping
@@ -44,5 +46,6 @@ public class StudentController {
     public void deleteStudent(@PathVariable String email){
       boolean isDeleted  = studentService.deleteStudent(email);
     }
+
 
 }
